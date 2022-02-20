@@ -1,0 +1,29 @@
+// &arduino_serial {
+// 	/delete-property/ rx-pull-up;
+
+// 	w1: w1 {
+// 		compatible = "zephyr,w1-serial";
+// 		#address-cells = <1>;
+// 		#size-cells = <0>;
+// 		label = "W1";
+// 	};
+// };
+
+&arduino_i2c {
+	sda-pin = <30>;
+	scl-pin = <31>;
+
+	w1: w1@18 {
+		compatible = "maxim,ds2482-800";
+		reg = <0x18>;
+		label = "W1";
+
+		w1_gpio: ds2413 {
+			compatible = "maxim,ds2413";
+			gpio-controller;
+			#gpio-cells = <2>;
+			ngpios = <2>;
+			label = "W1_GPIO";
+		};
+	};
+};
