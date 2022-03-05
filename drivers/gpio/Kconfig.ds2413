@@ -1,0 +1,7 @@
+# Copyright (c) 2022 Caspar Friedrich <c.s.w.friedrich@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config GPIO_DS2413
+	bool "DS2413 1-Wire IO-Controller"
+	depends on W1
+	select GPIO_DRV_CMD

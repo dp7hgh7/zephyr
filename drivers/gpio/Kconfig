@@ -131,4 +131,6 @@ source "drivers/gpio/Kconfig.gd32"
 
 source "drivers/gpio/Kconfig.xlnx_ps"
 
+source "drivers/gpio/Kconfig.ds2413"
+
 endif # GPIO
