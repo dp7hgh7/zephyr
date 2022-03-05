@@ -11,6 +11,8 @@
 #ifndef ZEPHYR_DRIVERS_GPIO_GPIO_UTILS_H_
 #define ZEPHYR_DRIVERS_GPIO_GPIO_UTILS_H_
 
+#include <sys/slist.h>
+
 #define GPIO_PORT_PIN_MASK_FROM_NGPIOS(ngpios)			\
 	((gpio_port_pins_t)(((uint64_t)1 << (ngpios)) - 1U))
 
