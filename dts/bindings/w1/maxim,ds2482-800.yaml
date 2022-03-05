@@ -1,0 +1,12 @@
+description: DS2482-800 8-Channel 1-Wire Master
+
+compatible: "maxim,ds2482-800"
+
+include: [i2c-device.yaml, w1-controller.yaml]
+
+properties:
+  active-pullup:
+    type: boolean
+    description: |
+      Controls whether an active pullup or a passive pullup is used to drive a
+      1-Wire line from low to high.

@@ -1,0 +1,4 @@
+config W1_DS2482_800
+	bool "DS2482-800 8-Channel 1-Wire Master"
+	default y if $(dt_compat_enabled,$(maxim,ds2482-800))
+	depends on I2C

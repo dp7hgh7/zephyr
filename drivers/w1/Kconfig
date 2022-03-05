@@ -22,6 +22,8 @@ config W1_INIT_PRIORITY
 	help
 	  1-Wire device driver initialization priority.
 
+rsource "Kconfig.ds2482-800"
+rsource "Kconfig.ds2484"
 rsource "Kconfig.test"
 rsource "Kconfig.zephyr_serial"
 
