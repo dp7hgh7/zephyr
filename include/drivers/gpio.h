@@ -563,6 +563,10 @@ __subsystem struct gpio_driver_api {
 			       struct gpio_callback *cb,
 			       bool set);
 	uint32_t (*get_pending_int)(const struct device *dev);
+
+#ifdef CONFIG_GPIO_DRV_CMD
+	int (*drv_cmd)(const struct device *dev, uint32_t cmd, const void *data, size_t len);
+#endif
 };
 
 /**
@@ -1326,6 +1330,39 @@ static inline int z_impl_gpio_get_pending_int(const struct device *dev)
 	}
 
 	return api->get_pending_int(dev);
+}
+
+/**
+ * @brief Send extra command to driver.
+ *
+ * Implementation and accepted commands are driver specific.
+ * Refer to the drivers for more information.
+ *
+ * @param dev GPIO device instance.
+ * @param cmd Command to driver.
+ * @param data Data for the command.
+ * @param len Length of the data package.
+ *
+ * @retval 0 If successful.
+ * @retval -ENOSYS If function is not iplemented.
+ * @retval -ENOTSUP if feature is not enabled.
+ */
+__syscall int gpio_drv_cmd(const struct device *dev, uint32_t cmd, const void *data, size_t len);
+
+static inline int z_impl_gpio_drv_cmd(const struct device *dev, uint32_t cmd, const void *data,
+				      size_t len)
+{
+#ifdef CONFIG_GPIO_DRV_CMD
+	const struct gpio_driver_api *api = (const struct gpio_driver_api *)dev->api;
+
+	if (api->drv_cmd == NULL) {
+		return -ENOSYS;
+	}
+
+	return api->drv_cmd(dev, cmd, data, len);
+#endif /* CONFIG_GPIO_DRV_CMD */
+
+	return -ENOTSUP;
 }
 
 /**

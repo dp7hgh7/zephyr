@@ -27,6 +27,14 @@ config GPIO_INIT_PRIORITY
 	help
 	  GPIO driver device initialization priority.
 
+config GPIO_DRV_CMD
+	bool "Enable driver commands API"
+	help
+	  This enables the API to send extra commands to drivers.
+	  This allows drivers to expose hardware specific functions.
+
+	  Says no if not sure.
+
 source "drivers/gpio/Kconfig.b91"
 
 source "drivers/gpio/Kconfig.dw"
